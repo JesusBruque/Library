@@ -1,0 +1,40 @@
+.card {
+    width: 100vh;
+    background-color: rgba(249, 251, 254, 0.903);
+}
+
+.card-header {
+    height: 60px;
+    background-color: rgb(177, 177, 177);
+    font-size: large;
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.search {
+    align-self: flex-end;
+    align-self: center;
+}
+
+.newButton {
+    align-self: end;
+    margin: 10px;
+}
+
+table {
+    background-color: black;
+    margin: auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+tr {
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    color: white;
+}
