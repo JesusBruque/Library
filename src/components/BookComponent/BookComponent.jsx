@@ -7,7 +7,7 @@ import "./bookComponent.css";
 //Models
 import {Book} from "../../models/book.class.js";
 
-function BookComponent({ book }) {
+function BookComponent({ book}) {
   return (
     <tr>
       <td>{book.id}</td>

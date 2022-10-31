@@ -5,32 +5,50 @@ import BookComponent from '../../components/BookComponent/BookComponent';
 import "./bookList.css";
 
 //Models
-import { Book } from "../../models/book.class.js";
-import BookForm from '../../components/BookForm/BookForm';
+import { Books } from "../../models/db.js"
+
+//Components
+import BookFormAdd from '../../components/BookFormAdd/BookFormAdd.jsx';
 
 const BookList = () => {
 
-    const defaultBook1 = new Book(1, "La Casa de los espíritus", "Isabel Allende", "Bibliotex");
-    const defaultBook2 = new Book(2, "Don Quijote de la Mancha", "Miguel de Cervantes", "Millenium")
-    const defaultBook3 = new Book(3, "Los Miserables", "Victor Hugo", "Vertice")
+    const [books, setBooks] = useState(Books);
+    const [copyBooks, setcopyBooks] = useState([]);
+    const [button, setButton] = useState(false);
+   
+    console.log(books)
 
-    const [books, setBooks] = useState([defaultBook1, defaultBook2, defaultBook3]);
+    const buttonChange = () => {
+        setButton(!button);
+    }
+
+    const addNewBook = (book) => {
+        const tempBook = [...books];
+        tempBook.push(book);
+        setBooks(tempBook);
+    }
+
+    const searchBook = (e) => {
+        let inputHandler = e.target.value.toLowerCase()
+        setcopyBooks(books)
+    }
+
+    console.log(copyBooks)
 
     useEffect(() => {
     }, [books]);
 
     return (
         <div className="card">
-
             <nav className="navbar card-header p-2">
                 <div className='col-3 header'>Biblioteca</div>
                 <form className="col-3 d-flex search mb-1" role="search">
-                <span className="input-group-text" id="inputSearch">Search</span>
-                    <input className="form-control" id="inputSearch" type="search" aria-label="Search" />
+                    <span className="input-group-text" id="inputSearch">Search</span>
+                    <input onChange={searchBook} className="form-control" id="inputSearch" type="search" aria-label="Search" />
                 </form>
             </nav>
             <div className='newButton'>
-                <button type='button' className='btn btn-success'>New</button>
+                <button type='button' onClick={buttonChange} className='btn btn-success'>New</button>
             </div>
             
             <div className="card-body">
@@ -52,7 +70,8 @@ const BookList = () => {
                     </tbody>
                 </table>
             </div>
-            <BookForm />
+            {button === true ? <BookFormAdd add={addNewBook}/> : null }
+            
         </div>
     );
 }

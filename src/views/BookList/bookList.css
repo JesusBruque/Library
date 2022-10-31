@@ -1,7 +1,13 @@
 .card {
-    width: 100vh;
+    width: 1500px;
     background-color: rgba(249, 251, 254, 0.903);
 }
+
+@media screen and (max-width: 1500px) {
+    .card {
+        width: 100%;
+    }
+  }
 
 .card-header {
     height: 60px;

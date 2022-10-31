@@ -10,4 +10,5 @@ export class Book {
         this.author = author;
         this.editorial = editorial;
     }
+
 }
