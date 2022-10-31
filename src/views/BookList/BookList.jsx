@@ -13,11 +13,9 @@ import BookFormAdd from '../../components/BookFormAdd/BookFormAdd.jsx';
 const BookList = () => {
 
     const [books, setBooks] = useState(Books);
-    const [copyBooks, setcopyBooks] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
     const [button, setButton] = useState(false);
-   
-    console.log(books)
-
+    
     const buttonChange = () => {
         setButton(!button);
     }
@@ -28,15 +26,9 @@ const BookList = () => {
         setBooks(tempBook);
     }
 
-    const searchBook = (e) => {
-        let inputHandler = e.target.value.toLowerCase()
-        setcopyBooks(books)
-    }
-
-    console.log(copyBooks)
-
     useEffect(() => {
-    }, [books]);
+       
+    }, [books, searchInput]);
 
     return (
         <div className="card">
@@ -44,7 +36,7 @@ const BookList = () => {
                 <div className='col-3 header'>Biblioteca</div>
                 <form className="col-3 d-flex search mb-1" role="search">
                     <span className="input-group-text" id="inputSearch">Search</span>
-                    <input onChange={searchBook} className="form-control" id="inputSearch" type="search" aria-label="Search" />
+                    <input onChange={(event) => {setSearchInput(event.target.value)}} className="form-control" id="inputSearch" type="search" aria-label="Search" />
                 </form>
             </nav>
             <div className='newButton'>
@@ -62,7 +54,13 @@ const BookList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {books.map((book, index) => {
+                        {books.filter((val) => {
+                            if(searchInput === ""){
+                                return val
+                            } else if(val.title.toLowerCase().includes(searchInput.toLowerCase())){
+                                return val
+                            }
+                        }).map((book, index) => {
                             return (
                                 <BookComponent key={index} book={book} />
                             )
@@ -70,8 +68,7 @@ const BookList = () => {
                     </tbody>
                 </table>
             </div>
-            {button === true ? <BookFormAdd add={addNewBook}/> : null }
-            
+            {button === true ? <BookFormAdd button={button} setButton={setButton} add={addNewBook}/> : null }
         </div>
     );
 }

@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Book } from '../../models/book.class';
 
 //Style
 import "./bookFormAdd.css";
 
-const BookFormAdd = ({ add }) => {
+const BookFormAdd = ({ add, button, setButton }) => {
 
     const idRef = useRef('');
     const titleRef = useRef('');
@@ -21,6 +21,7 @@ const BookFormAdd = ({ add }) => {
             editorialRef.current.value,
         )
         add(newBook);
+        setButton(!button)
     }
 
     return (
@@ -47,7 +48,7 @@ const BookFormAdd = ({ add }) => {
                         </div>
                     </div>
                     <div className="col">
-                        <button type="submit" className="btn btn-success button mb-3">Guardar</button>
+                        <button type="submit"  className="btn btn-success button mb-3">Guardar</button>
                     </div>
                 </div>
             </form>
