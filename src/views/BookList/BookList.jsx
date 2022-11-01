@@ -15,6 +15,7 @@ const BookList = () => {
     const [books, setBooks] = useState(Books);
     const [searchInput, setSearchInput] = useState("");
     const [button, setButton] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     
     const buttonChange = () => {
         setButton(!button);
@@ -62,13 +63,13 @@ const BookList = () => {
                             }
                         }).map((book, index) => {
                             return (
-                                <BookComponent key={index} book={book} />
+                                <BookComponent isEditing={isEditing} setIsEditing={setIsEditing} books={books} setBooks={setBooks} key={index} book={book} />
                             )
                         })}
                     </tbody>
                 </table>
             </div>
-            {button === true ? <BookFormAdd button={button} setButton={setButton} add={addNewBook}/> : null }
+            {button === true ? <BookFormAdd isEditing={isEditing} setIsEditing={setIsEditing} books={books} setBooks={setBooks} button={button} setButton={setButton} add={addNewBook}/> : null }
         </div>
     );
 }

@@ -7,10 +7,16 @@ import "./bookComponent.css";
 //Models
 import {Book} from "../../models/book.class.js";
 
-function BookComponent({ book}) {
+const BookComponent = ({ book, books, setBooks, isEditing, setIsEditing}) => {
+
+  const handleEditClick = (book) => {
+    setIsEditing(true);
+    setBooks({ ...book });
+}
+
   return (
-    <tr>
-      <td>{book.id}</td>
+    <tr  >
+      <td onClick={handleEditClick} >{book.id}</td>
       <td>{book.title}</td>
       <td>{book.author}</td>
       <td>{book.editorial}</td>
