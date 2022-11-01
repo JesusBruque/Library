@@ -4,12 +4,14 @@ export class Book {
     author = '';
     editorial = '';
 
+    static count = 4;
+
     constructor(id, title, author, editorial){
-        // var nextId = Book[Book.length - 1].id
-        var nextId = 1
-        this.id = nextId++;
+        this.id = this.constructor.count++;
         this.title = title;
         this.author = author;
         this.editorial = editorial;
     }
 }
+
+console.log(Book.title)

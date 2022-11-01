@@ -9,14 +9,14 @@ import {Book} from "../../models/book.class.js";
 
 const BookComponent = ({ book, books, setBooks, isEditing, setIsEditing}) => {
 
-  const handleEditClick = (book) => {
-    setIsEditing(true);
-    setBooks({ ...book });
-}
+  const handleEditClick = () => {
+    let click = book.id
+    console.log(click)
+  }
 
   return (
-    <tr  >
-      <td onClick={handleEditClick} >{book.id}</td>
+    <tr onClick={() => handleEditClick()}>
+      <td>{book.id}</td>
       <td>{book.title}</td>
       <td>{book.author}</td>
       <td>{book.editorial}</td>
