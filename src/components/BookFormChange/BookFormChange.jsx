@@ -6,45 +6,33 @@ import { Book } from '../../models/book.class';
 import "./bookFormChange.css";
 
 
-const BookFormChange = ({ modify }) => {
+const BookFormChange = () => {
 
-    const idRef = useRef('');
-    const titleRef = useRef('');
-    const authorRef = useRef('');
-    const editorialRef = useRef('');
-
-    const addBook = (e) => {
-        e.preventDefault()
-        const newBook = new Book(
-            idRef.current.value,
-            titleRef.current.value,
-            authorRef.current.value,
-            editorialRef.current.value,
-        )
-        modify(newBook);
+    const handleFormChange = (book) => {
+       
     }
 
     return (
         <>
             <h3 className='m-3'>Modificar Libro</h3>
-            <form onSubmit={addBook} className='m-3'>
+            <form onChange={handleFormChange} className='m-3'>
                 <div className="row mb-3">
                     <div className="col">
                         <div className="form-outline input-group">
                             <span className="input-group-text">Título</span>
-                            <input ref={titleRef} id='inputTitle' type='text' className='form-control' required autoFocus />
+                            <input id='inputTitle' type='text' className='form-control' required autoFocus />
                         </div>
                     </div>
                     <div className="col">
                         <div className="form-outline input-group">
                             <span className="input-group-text">Autor</span>
-                            <input ref={authorRef} id='inputAuthor' type='text' className='form-control' required />
+                            <input id='inputAuthor' type='text' className='form-control' required />
                         </div>
                     </div>
                     <div className="col">
                         <div className="form-outline input-group">
                             <span className="input-group-text">Editorial</span>
-                            <input ref={editorialRef} id='inputEditorial' type='text' className='form-control' required />
+                            <input id='inputEditorial' type='text' className='form-control' required />
                         </div>
                     </div>
                     <div className="col">
@@ -58,7 +46,7 @@ const BookFormChange = ({ modify }) => {
 
 
 BookFormChange.propTypes = {
-    modify: PropTypes.func.isRequired
+
 };
 
 

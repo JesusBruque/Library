@@ -9,22 +9,27 @@ import { Books } from "../../models/db.js"
 
 //Components
 import BookFormAdd from '../../components/BookFormAdd/BookFormAdd.jsx';
+import BookFormChange from '../../components/BookFormChange/BookFormChange';
 
 const BookList = () => {
 
     const [books, setBooks] = useState(Books);
     const [searchInput, setSearchInput] = useState("");
-    const [button, setButton] = useState(false);
+    const [isAdd, setIsAdd] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     
-    const buttonChange = () => {
-        setButton(!button);
+    const buttonAdd = () => {
+        setIsAdd(!isAdd);
     }
 
     const addNewBook = (book) => {
         const tempBook = [...books];
         tempBook.push(book);
         setBooks(tempBook);
+    }
+
+    const editBook = (book) => {
+
     }
 
     useEffect(() => {
@@ -41,7 +46,7 @@ const BookList = () => {
                 </form>
             </nav>
             <div className='newButton'>
-                <button type='button' onClick={buttonChange} className='btn btn-success'>New</button>
+                <button type='button' onClick={buttonAdd} className='btn btn-success'>New</button>
             </div>
             
             <div className="card-body">
@@ -69,7 +74,8 @@ const BookList = () => {
                     </tbody>
                 </table>
             </div>
-            {button === true ? <BookFormAdd isEditing={isEditing} setIsEditing={setIsEditing} books={books} setBooks={setBooks} button={button} setButton={setButton} add={addNewBook}/> : null }
+            {isAdd ? <BookFormAdd books={books} setBooks={setBooks} add={addNewBook}/> : null }
+            {isEditing ? <BookFormChange /> : null}
         </div>
     );
 }
