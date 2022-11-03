@@ -17,7 +17,8 @@ const BookList = () => {
     const [searchInput, setSearchInput] = useState("");
     const [isAdd, setIsAdd] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    
+    const [editedBook, setEditedBook] = useState([]);
+
     const buttonAdd = () => {
         setIsAdd(!isAdd);
     }
@@ -28,12 +29,17 @@ const BookList = () => {
         setBooks(tempBook);
     }
 
-    const editBook = (book) => {
-
+    const editBook = (e) => {
+        const {name, value} = e.target
+        setEditedBook({...editedBook, [name]: value})
     }
+   
+
+    console.log(books)
+    console.log(editedBook)
 
     useEffect(() => {
-       
+
     }, [books, searchInput]);
 
     return (
@@ -42,13 +48,13 @@ const BookList = () => {
                 <div className='col-3 header'>Biblioteca</div>
                 <form className="col-3 d-flex search mb-1" role="search">
                     <span className="input-group-text" id="inputSearch">Search</span>
-                    <input onChange={(event) => {setSearchInput(event.target.value)}} className="form-control" id="inputSearch" type="search" aria-label="Search" />
+                    <input onChange={(event) => { setSearchInput(event.target.value) }} className="form-control" id="inputSearch" type="search" aria-label="Search" />
                 </form>
             </nav>
             <div className='newButton'>
-                <button type='button' onClick={buttonAdd} className='btn btn-success'>New</button>
+                <button type='button' onClick={buttonAdd} className='btn btn-success'>Nuevo</button>
             </div>
-            
+
             <div className="card-body">
                 <table className="table">
                     <thead>
@@ -61,21 +67,46 @@ const BookList = () => {
                     </thead>
                     <tbody>
                         {books.filter((val) => {
-                            if(searchInput === ""){
+                            if (searchInput === "") {
                                 return val
-                            } else if(val.title.toLowerCase().includes(searchInput.toLowerCase())){
+                            } else if (val.title.toLowerCase().includes(searchInput.toLowerCase())) {
                                 return val
                             }
                         }).map((book, index) => {
                             return (
-                                <BookComponent isEditing={isEditing} setIsEditing={setIsEditing} books={books} setBooks={setBooks} key={index} book={book} />
+                                <BookComponent
+                                    book={book}
+                                    key={index}
+                                    editedBook={editedBook}
+                                    setEditedBook={setEditedBook}
+                                    isEditing={isEditing}
+                                    setIsEditing={setIsEditing}
+                                    books={books}
+                                    setBooks={setBooks}
+
+                                />
                             )
                         })}
                     </tbody>
                 </table>
             </div>
-            {isAdd ? <BookFormAdd books={books} setBooks={setBooks} add={addNewBook}/> : null }
-            {isEditing ? <BookFormChange /> : null}
+            {isAdd ?
+                <BookFormAdd
+                    books={books}
+                    setBooks={setBooks}
+                    add={addNewBook}
+                    isAdd={isAdd}
+                    setIsAdd={setIsAdd}
+                />
+                : null}
+            {isEditing ?
+                <BookFormChange
+                    editedBook={editedBook}
+                    setEditedBook={setEditedBook}
+                    change={editBook}
+                    setIsEditing={setIsEditing}
+                />
+                : null}
         </div>
     );
 }

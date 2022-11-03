@@ -13,5 +13,3 @@ export class Book {
         this.editorial = editorial;
     }
 }
-
-console.log(Book.title)

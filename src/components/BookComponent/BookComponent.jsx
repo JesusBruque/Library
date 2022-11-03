@@ -4,15 +4,12 @@ import PropTypes from 'prop-types';
 //Style
 import "./bookComponent.css";
 
-//Models
-import { Book } from "../../models/book.class.js";
+const BookComponent = ({ book, isEditing, setIsEditing, setEditedBook }) => {
 
-const BookComponent = ({ book, isEditing, setIsEditing }) => {
-
-	const handleEditClick = (e) => {
+	const handleEditClick = async (e) => {
 		setIsEditing(!isEditing)
-		const click = book.title
-		console.log(click)
+		const editBook = book
+		await setEditedBook(editBook)
 	}
 
 	return (
@@ -26,7 +23,10 @@ const BookComponent = ({ book, isEditing, setIsEditing }) => {
 }
 
 BookComponent.propTypes = {
-	book: PropTypes.instanceOf(Book)
+	book: PropTypes.object,
+	isEditing: PropTypes.bool,
+	setIsEditing: PropTypes.func,
+	setEditedBook: PropTypes.func,
 }
 
 export default BookComponent;

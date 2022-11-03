@@ -5,14 +5,14 @@ import { Book } from '../../models/book.class';
 //Style
 import "./bookFormAdd.css";
 
-const BookFormAdd = ({ add, button, setButton }) => {
+const BookFormAdd = ({ add, isAdd, setIsAdd }) => {
 
     const idRef = useRef('');
     const titleRef = useRef('');
     const authorRef = useRef('');
     const editorialRef = useRef('');
 
-    const addBook = (e) => {
+    const addBook = async (e) => {
         e.preventDefault()
         const newBook = new Book(
             idRef.current.value,
@@ -21,7 +21,7 @@ const BookFormAdd = ({ add, button, setButton }) => {
             editorialRef.current.value,
         )
         add(newBook);
-        setButton(!button)   
+        await setIsAdd(!isAdd);
     }
 
     return (
@@ -58,7 +58,9 @@ const BookFormAdd = ({ add, button, setButton }) => {
 
 
 BookFormAdd.propTypes = {
-    add: PropTypes.func.isRequired
+    add: PropTypes.func,
+    isAdd: PropTypes.bool,
+    setIsAdd: PropTypes.func
 };
 
 
