@@ -29,15 +29,14 @@ const BookList = () => {
         setBooks(tempBook);
     }
 
-    const editBook = (e) => {
-        const {name, value} = e.target
-        setEditedBook({...editedBook, [name]: value})
+    const editBook = async (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setEditedBook({ ...editedBook, [name]: value })
+        const index = books.findIndex((el) => el.id === editedBook.id)
+        books[index] = editedBook
     }
-   
-
-    console.log(books)
-    console.log(editedBook)
-
+    
     useEffect(() => {
 
     }, [books, searchInput]);

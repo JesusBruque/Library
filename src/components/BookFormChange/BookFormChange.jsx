@@ -6,7 +6,7 @@ import { Book } from '../../models/book.class';
 import "./bookFormChange.css";
 
 
-const BookFormChange = ({editedBook, setEditedBook, change, setIsEditing}) => {
+const BookFormChange = ({editedBook, change}) => {
 
     return (
         <>
@@ -31,16 +31,12 @@ const BookFormChange = ({editedBook, setEditedBook, change, setIsEditing}) => {
                             <input defaultValue={editedBook.editorial} name='editorial' id='inputEditorial' type='text' className='form-control' required />
                         </div>
                     </div>
-                    <div className="col">
-                        <button type="submit" className="btn btn-success button mb-3">Guardar</button>
-                    </div>
                 </div>
             </form>
         </>
     );
 };
 
-//onClick={() => {setIsEditing(false)}} 
 BookFormChange.propTypes = {
     editedBook: PropTypes.object,
     setEditedBook: PropTypes.func,
